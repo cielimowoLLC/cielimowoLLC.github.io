@@ -349,3 +349,47 @@ body {
     -webkit-tap-highlight-color: $theme-dark;
 }
 
+// Navbar logo -------------------------------------------------
+// Below 768px the bar is always white  -> purple logo
+// Above 768px, at the top the bar is transparent over the photo -> white logo
+// Above 768px, after scrolling the bar turns white  -> purple logo
+ 
+#mainNav .navbar-brand {
+    padding: 18px 15px;
+}
+ 
+#mainNav .navbar-brand img {
+    display: block;
+    width: 280px;
+    max-width: 55vw;
+    height: auto;
+}
+ 
+// Default (phones / narrow windows): purple logo only
+#mainNav .navbar-brand img.logo-light {
+    display: none;
+}
+ 
+#mainNav .navbar-brand img.logo-dark {
+    display: block;
+}
+ 
+@media (min-width: 768px) {
+    // Top of the page: white logo over the photo
+    #mainNav .navbar-brand img.logo-light {
+        display: block;
+    }
+ 
+    #mainNav .navbar-brand img.logo-dark {
+        display: none;
+    }
+ 
+    // After scrolling (Bootstrap adds .affix): purple logo on the white bar
+    #mainNav.affix .navbar-brand img.logo-light {
+        display: none;
+    }
+ 
+    #mainNav.affix .navbar-brand img.logo-dark {
+        display: block;
+    }
+}
