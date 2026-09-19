@@ -34,7 +34,7 @@
 // }
 
 // variables.less
-$theme-primary: #4d1042;
+$theme-primary: #31005d;
 $theme-dark: #222;
 
 // Import partials from `sass_dir` (defaults to `_sass`)
@@ -58,14 +58,14 @@ $theme-dark: #222;
     height: auto;
 }
 
-#mainNav .logo-dark {
+#mainNav .navbar-brand img.logo-dark {
     display: none;
 }
 
-#mainNav.affix .logo-light {
+#mainNav.affix .navbar-brand img.logo-light {
     display: none;
 }
 
-#mainNav.affix .logo-dark {
+#mainNav.affix .navbar-brand img.logo-dark {
     display: block;
 }
