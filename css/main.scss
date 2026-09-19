@@ -43,29 +43,3 @@ $theme-dark: #221;
         "base"
 ;
 
-// ---------------------------------------------------------------
-// Navbar logo: white version over the photo, purple version on the
-// white scrolled bar
-// ---------------------------------------------------------------
-#mainNav .navbar-brand {
-    padding: 18px 15px;
-}
-
-#mainNav .navbar-brand img {
-    display: block;
-    width: 280px;
-    max-width: 55vw;
-    height: auto;
-}
-
-#mainNav .navbar-brand img.logo-dark {
-    display: none;
-}
-
-#mainNav.affix .navbar-brand img.logo-light {
-    display: none;
-}
-
-#mainNav.affix .navbar-brand img.logo-dark {
-    display: block;
-}
