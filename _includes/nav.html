@@ -1,4 +1,73 @@
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+ 
+    <!-- Random coordinates ticker (centre of the bar) -->
+    <div class="nav-coords" id="navCoords" aria-hidden="true"></div>
+ 
+    <style>
+        /* Hidden on small screens so it can't collide with the logo and menu */
+        #mainNav .nav-coords {
+            display: none;
+        }
+        @media (min-width: 1200px) {
+            #mainNav .nav-coords {
+                display: block;
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+                line-height: 50px;
+                font-family: Consolas, "SFMono-Regular", Menlo, "Liberation Mono", monospace;
+                font-size: 13px;
+                letter-spacing: 1px;
+                white-space: nowrap;
+                color: rgba(255, 255, 255, 0.7);   /* over the photo */
+                pointer-events: none;
+                transition: color 0.3s;
+            }
+            #mainNav.affix .nav-coords {
+                color: #222;                        /* on the white scrolled bar */
+            }
+        }
+    </style>
+ 
+    <script>
+    (function () {
+        var el = document.getElementById('navCoords');
+        if (!el) return;
+ 
+        var RATE_HZ = 3;                 // updates per second
+        var RANDOMIZE_DEGREES = true;    // true: every number is random
+        var BASE_LAT = 52;               // used only when the flag above is false
+        var BASE_LON = 17;
+ 
+        function rnd(max) { return Math.floor(Math.random() * max); }
+        function two(n) { return (n < 10 ? '0' : '') + n; }
+ 
+        // one coordinate part, e.g. 52°28'49.2"
+        function part(deg) {
+            var m = rnd(60);
+            var s = (Math.random() * 60).toFixed(1);
+            if (parseFloat(s) >= 60) { s = '59.9'; }
+            if (parseFloat(s) < 10) { s = '0' + s; }
+            return deg + '\u00B0' + two(m) + "'" + s + '"';
+        }
+ 
+        function tick() {
+            var lat = RANDOMIZE_DEGREES ? rnd(90) : BASE_LAT;
+            var lon = RANDOMIZE_DEGREES ? rnd(180) : BASE_LON;
+            el.textContent = part(lat) + 'N ' + part(lon) + 'E';
+        }
+ 
+        tick();
+ 
+        // Respect "reduce motion": show one value and don't animate
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+        setInterval(tick, 1000 / RATE_HZ);
+    })();
+    </script>
+ 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -13,7 +82,7 @@
                 <img class="logo-dark" src="{{ '/img/logo-dark.png' | relative_url }}" alt="Cielimowo Technology">
             </a>
         </div>
-
+ 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -27,7 +96,7 @@
                     <a class="page-scroll" href="#portfolio">Our Products</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#contact">Store</a>
+                    <a href="https://cielimowotechnology.bigcartel.com/" target="_blank" rel="noopener">Store</a>
                 </li>
             </ul>
         </div>
